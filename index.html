@@ -1,106 +1,131 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>Bulletin.GitHub.io by jwtrumbull</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">Bulletin.GitHub.io</h1>
-      <h2 class="project-tagline"></h2>
-    </section>
+<html><head>
+<meta charset="UTF-8">
+<title>SJSU Analytics</title>
+<link href="jquery.mobile-1.0b3/jquery.mobile-1.0b3.min.css" rel="stylesheet" type="text/css">
+<script src="jquery.mobile-1.0b3/jquery-1.6.4.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(document).bind("mobileinit", function() { 
+		$.mobile.page.prototype.options.addBackBtn = true; 
+	});
+	var validIds = ["123456789", "000000000"];
+  var currentUser = 0;
+</script>
+<script src="../../jquery.mobile-1.0b3/jquery.mobile-1.0b3.min.js" type="text/javascript"></script>
+<link href="styles/custom.css" rel="stylesheet" type="text/css">
+<link href="styles/f.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div data-role="page" id="loginpage" data-theme="d">
+  <div data-role="header" data-theme="a" data-backbtn="false">
+  <h2>Login</h2>
+  <label>ID:<br/></label>
+  <input id = "id" type="text" name="idNumber" value="Enter ID Number"><br/>
 
-    <section class="main-content">
-      <p>&lt;!DOCTYPE html&gt;
-</p>
+  <script>
+  function myIdChecker(){
+    var idNum = document.getElementById("id").value;
+    var pageNav ="";
 
-SJSU Analytics
+      for(i = 0; i < validIds.length; i++){
+        var currentID = validIds[i];
 
-
-
-
-
-
-
-
-<p>
-
-
-</p>
-
-<div id="loginpage">
-  <div>
-  <h2>
-<a id="login" class="anchor" href="#login" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Login</h2>
-  ID:<br>
-  <br>
-
-  
-  Log In
-  <p id="log_info"></p>
+        var n = idNum.localeCompare(currentID);
+        if(n == 0){
+          currentUser = idNum;
+          window.location= "#page";
+        } 
+      }
+  }
+  </script>
+  <button onclick="myIdChecker()">Log In</button>
+  <p id = "log_info"></p>
 
   </div>
 </div>
 
-<div id="page">
-  <div>
-    <a href="#options"></a>
-    <a href="#search" height="20"></a>
-    <h1>
-<a id="" class="anchor" href="#" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><img src="images/SJSU.PNG" width="300" height="50" alt="San Jose State University">
-</h1>
+<div data-role="page" id="page" data-theme="d">
+  <div data-role="header" data-theme="a" data-backbtn="false">
+  	<a href="#options" data-role="button" data-icon="plus" data-iconpos="notext"></a>
+  	<a href="#search" data-role="button" data-icon="search" data-iconpos="notext" radius="20" height="20"></a>
+    <h1><img src="images/SJSU.PNG" width="300" height="50" alt="San Jose State University"/></h1>
   </div>
-  <div>
-    <ul id="homelist">
-      <li id="0001">
-        
-        <a href="#page2"><img src="images/Capture.PNG" width="696" height="471" alt="">The 1975</a>
+  <div data-role="content">
+    <ul id = "homelist" data-role="listview" data-theme="d">
+      <li id = "0001" class = "event" onclick = "adlook(name2)">
+        <script>
+          var name2 = "The 1975";
+        </script>
+        <a href="#page2"><img src="images/Capture.PNG" width="696" height="471" alt=""/>The 1975</a>
       </li>
-      <li id="0002">
-        
-        <a href="#page3"><img src="images/nxt.PNG" width="661" height="440" alt="">WWE NXT Live</a>
+      <li id = "0002" class = "event" onclick = "adlook(name3)">
+        <script>
+          var name3 = "WWE NXT";
+        </script>
+        <a href="#page3"><img src="images/nxt.PNG" width="661" height="440" alt=""/>WWE NXT Live</a>
       </li>
-      <li id="0003">
-        
-        <a href="#page4"><img src="images/brandnew.PNG" width="661" height="438" alt="">Brand New</a>
+      <li id = "0003" class = "event" onclick = "adlook(name4)">
+        <script>
+          var name4 = "Brand New";
+        </script>
+        <a href="#page4"><img src="images/brandnew.PNG" width="661" height="438" alt=""/>Brand New</a>
       </li>
-      <li id="0004">
-        
-        <a href="#page5"><img src="images/scott.PNG" width="826" height="551" alt="">Scott Bradlees Postmodern Jukebox</a>
+      <li id = "0004" class = "event" onclick = "adlook(name5)">
+        <script>
+          var name5 = "Scott Bradlees Postmodern Jukebox";
+        </script>
+        <a href="#page5"><img src="images/scott.PNG" width="826" height="551" alt=""/>Scott Bradlees Postmodern Jukebox</a>
       </li>
       
-      <li id="0005">
-        
-        <a href="#page6"><img src="images/subway-logo-green.PNG" width="826" height="551" alt="">Subway</a>
+      <li id = "0005" class = "promotion" onclick="adlook(name6)">
+        <script>
+          var name6 = "Subway";
+        </script>
+        <a href="#page6"><img src="images/subway-logo-green.PNG" width="826" height="551" alt=""/>Subway</a>
       </li>
 
-      <li id="0006">
-        
-        <a href="#page7"><img src="images/cs100w.jpg" width="826" height="551" alt="">CS100W</a>
+      <li id = "0006" class = "courses" onclick="adlook(name7)">
+        <script>
+          var name7 = "CS100W";
+        </script>
+        <a href="#page7"><img src="images/cs100w.jpg" width="826" height="551" alt=""/>CS100W</a>
       </li>
 
     </ul>
   </div>
-  <div>
-    <h4>
-<a id="sjsu-analytics" class="anchor" href="#sjsu-analytics" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SJSU Analytics</h4>
+  <div data-role="footer" data-theme="c">
+    <h4>SJSU Analytics</h4>
   </div>
 </div>
 
+<script>
+  var saved = new Array();
+  function saveEvent(x){
+    var temp = document.getElementById(x);
+    var clone = temp.cloneNode(true);
+    saved.push(clone);
+  }
+</script>
 
+<script>
+  function adlook(x){
+    document.getElementById("data").innerHTML += "<tr>" + "<td>" + Date() + "</td>"  + "<td>" + x + "</td>"  + "<td>" + "Viewed" + "</td>"  + "<td>" + "" + "</td>"+ "<td>" + getID() + "</td>"  +"</tr>";
+  }
+</script>>
+<script>
 
-&gt;
+	function updateTable(x){
+		document.getElementById("data").innerHTML += "<tr>" + "<td>" + Date() + "</td>"  + "<td>" + x.name + "</td>"  + "<td>" + "" + "</td>"  + "<td>" + "Saved" + "</td>"+ "<td>" + getID() + "</td>"  +"</tr>";
+	}
+	function getID(){
+		return currentUser;
+		}
+</script>
 
-
-<div id="datapage">
+<div data-role="page" id="datapage" data-theme="d">
 
 <div>
-<table id="data">
+<table id = "data">
 <tr>
     <th>Access Time</th>
     <th>Advertisment/Event</th> 
@@ -110,80 +135,93 @@ SJSU Analytics
   </tr>
 </table>
 </div>
-
-<p></p>
 </div>
 
-<div id="page7">
-  <div>
-    <h1 id="title7">
-<a id="cs100w" class="anchor" href="#cs100w" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>CS100W</h1>
+<div data-role="page" id="page7" data-theme="d">
+  <div data-role="header" data-theme="a">
+    <h1 id = "title7">CS100W</h1>
   </div>  
-  <div>
+  <div data-role="content">
     <p><img src="images/cs100w.jpg" width="290" height="187" alt="CS100W"><br>
-    </p>
-<p>The purpose of Upper Division Technical Writing, CS100W is to develop advance proficiency in college-level writing, contemporary research strategies, and methodologies through preparation of proposals, technical reports, and presentations based on peer-reviewed scholarly research.</p>
+    <p>The purpose of Upper Division Technical Writing, CS100W is to develop advance proficiency in college-level writing, contemporary research strategies, and methodologies through preparation of proposals, technical reports, and presentations based on peer-reviewed scholarly research.</p>
       
-   
-  Add to favorites
-  <a href="http://www.sjsu.edu/cs100w/">More info</a>
+   <script>
+   var idN6 = "0006";
+   var page7 = new Object();
+   page7.name = "CS100W";
+   function updateTable7(){
+      return updateTable(page7);
+   }
+  </script>
+  <button onclick = "updateTable7();saveEvent(idN6);">Add to favorites</button>
+  <button><a href="http://www.sjsu.edu/cs100w/" target="_blank">More info</a></button>
   </div>
-  <div>
-    <h4>
-<a id="sjsu-analytics-1" class="anchor" href="#sjsu-analytics-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SJSU Analytics</h4>
+  <div data-role="footer" data-theme="c">
+    <h4>SJSU Analytics</h4>
   </div>
 </div>
 
-<div id="page2">
-  <div>
-    <h1 id="title2">
-<a id="the-1975" class="anchor" href="#the-1975" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The 1975</h1>
-  </div>    
-  <div>
+<div data-role="page" id="page2" data-theme="d">
+  <div data-role="header" data-theme="a">
+    <h1 id = "title2">The 1975</h1>
+  </div>	
+  <div data-role="content">
    <p>Oct 18 at 8:00 PM</p>
     <p><img src="images/Capture.PNG" width="290" height="187" alt="Red Rock"><br>
-    General Admission $45.00
-    Student Discount: $35.00*</p>
-    <p>Available at the Event Center Box Office, all Ticketmaster outlets, Ticketmaster online or charge by phone: (800)            745-3000.      </p>
-    <p>*Student discounts only available at Box Office with a valid Student ID (one ID per customer, two ticket limit per   ID)
+	General Admission $45.00
+	Student Discount: $35.00*</p>
+    <p>Available at the Event Center Box Office, all Ticketmaster outlets, Ticketmaster online or charge by phone: (800) 			745-3000.      </p>
+    <p>*Student discounts only available at Box Office with a valid Student ID (one ID per customer, two ticket limit per 	ID)
       
       Doors open at 7:00 PM.</p>
       
-   
-  Add to favorites
+   <script>
+   var idN1 = "0001";
+   var page2 = new Object();
+   page2.name = "The 1975";
+   function updateTable2(){
+   		return updateTable(page2);
+   }
+  </script>
+  <button onclick = "updateTable2();saveEvent(idN1);">Add to favorites</button>
   </div>
-  <div>
-    <h4>
-<a id="sjsu-analytics-2" class="anchor" href="#sjsu-analytics-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SJSU Analytics</h4>
+  <div data-role="footer" data-theme="c">
+    <h4>SJSU Analytics</h4>
   </div>
 </div>
 
-<div id="page3">
-  <div>
-    <h1 id="title3">
-<a id="wwe-nxt-live" class="anchor" href="#wwe-nxt-live" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>WWE NXT Live</h1>
+
+<div data-role="page" id="page3" data-theme="d">
+  <div data-role="header" data-theme="a">
+    <h1 id = "title3">WWE NXT Live</h1>
   </div>
-  <div>
+  <div data-role="content">
    <p>Oct 28 at 7:30 PM</p>
     <p><img src="images/nxt.PNG" width="290" height="187" alt="Red Rock"><br>
       Reserved seating: $75 | $40 | $20</p>
     <p>Available at the Event Center Box Office, all Ticketmaster outlets, Ticketmaster online or charge by phone: (800) 745-3000.      </p>
     <p>Doors open at 6:30 PM.</p>
   </div>
-  
-  Add to favorites
-  <div>
-    <h4>
-<a id="sjsu-analytics-3" class="anchor" href="#sjsu-analytics-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SJSU Analytics</h4>
+  <script>
+  var idN2 = "0002";
+   var page3 = new Object();
+   page3.name = "WWE NXT Live";
+   function updateTable3(){
+   		return updateTable(page3);
+   }
+  </script>
+  <button onclick = "updateTable3();saveEvent(idN2);">Add to favorites</button>
+  <div data-role="footer" data-theme="c">
+    <h4>SJSU Analytics</h4>
   </div>
 </div>
 
-<div id="page4">
-  <div>
-    <h1 id="title4">
-<a id="brand-new" class="anchor" href="#brand-new" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Brand New</h1>
+
+<div data-role="page" id="page4" data-theme="d">
+  <div data-role="header" data-theme="a">
+    <h1 id = "title4">Brand New</h1>
   </div>
-  <div>
+  <div data-role="content">
    <p>Oct 31 at 7:00 PM</p>
     <p><img src="images/brandnew.PNG" width="290" height="187" alt="Red Rock"><br>
       General Admission
@@ -193,20 +231,26 @@ Day of Show: $45.00</p>
       
       Doors open at 6:00 PM.</p>
   </div>
-  
-  Add to favorites
-  <div>
-    <h4>
-<a id="sjsu-analytics-4" class="anchor" href="#sjsu-analytics-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SJSU Analytics</h4>
+  <script>
+   var idN3 = "0003";
+   var page4 = new Object();
+   page4.name = "Brand New";
+   function updateTable4(){
+   		return updateTable(page4);
+   }
+  </script>
+  <button onclick = "updateTable4();saveEvent(idN3);">Add to favorites</button>
+  <div data-role="footer" data-theme="c">
+    <h4>SJSU Analytics</h4>
   </div>
 </div>
 
-<div id="page5">
-  <div>
-    <h1 id="title5">
-<a id="scott-bradlees-post-modern-juckebox" class="anchor" href="#scott-bradlees-post-modern-juckebox" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Scott Bradlee's Post Modern Juckebox</h1>
+
+<div data-role="page" id="page5" data-theme="d">
+  <div data-role="header" data-theme="a">
+    <h1 id = "title5">Scott Bradlee's Post Modern Juckebox</h1>
   </div>
-  <div>
+  <div data-role="content">
    <p>Nov 23 at 8:00 PM</p>
     <p><img src="images/scott.PNG" width="290" height="187" alt="Red Rock"><br>
       Tickets on sale Friday, 4/22 at 10:00 AM
@@ -214,26 +258,30 @@ Reserved seating: $105.00 | $75.00 | $52.50 | $39.50</p>
     <p>Available at the Event Center Box Office, all Ticketmaster outlets, Ticketmaster online or charge by phone: (800) 745-3000. 
       
       Doors open at 7:00 PM.</p>
-   
-  Add to favorites
-      <a href="http://www.ticketmaster.com/event/1C00508CDC6A6CA1?came_from=WWW">More info</a>
+   <script>
+   var idN4 = "0004";
+   var page5 = new Object();
+   page5.name = "Scott Bradlee's Post Modern Juckebox";
+   function updateTable5(){
+   		return updateTable(page5);
+   }
+  </script>
+  <button onclick = "updateTable5();saveEvent(idN4);">Add to favorites</button>
+      <button><a href="http://www.ticketmaster.com/event/1C00508CDC6A6CA1?came_from=WWW" target="_blank">More info</a></button>
   </div>
-  <div>
-    <h4>
-<a id="sjsu-analytics-5" class="anchor" href="#sjsu-analytics-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SJSU Analytics</h4>
+  <div data-role="footer" data-theme="c">
+    <h4>SJSU Analytics</h4>
   </div>
 </div>
 
-<div id="page6">
-<div>
-    <h1 id="title6">
-<a id="subway" class="anchor" href="#subway" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Subway</h1>
-</div>
 
-<div>
+<div data-role="page" id="page6" data-theme="d">
+<div data-role="header" data-theme="a">
+	<h1 id = "title6">Subway</h1>
+</div>
+<div data-role="content">
     <p><img src="images/subway-logo-green.PNG" width="290" height="187" alt="Subway"><br>
-      $3.50 sub of the Day</p>
-<br>
+      $3.50 sub of the Day</p><br>
     <p>Fall Hours<br>
 
 Monday – Thursday 
@@ -247,190 +295,227 @@ Saturday
 <br>
 Sunday
 Closed</p>
-
-  Add to favorites
-      <a href="http://www.subway.com/en-us/menunutrition/menu/suboftheday?rdr=Homepage:Marquee:SOTD:W7:2016">More info</a>
+<script>
+   var idN5 = "0005";
+   var page6 = new Object();
+   page6.name = "Subway";
+   function updateTable6(){
+   		return updateTable(page6);
+   }
+  </script>
+  <button onclick = "updateTable6();saveEvent(idN5);">Add to favorites</button>
+      <button><a href="http://www.subway.com/en-us/menunutrition/menu/suboftheday?rdr=Homepage:Marquee:SOTD:W7:2016" target="_blank">More info</a></button>
+</div>
+<div data-role="footer" data-theme="c">
+  <h4>SJSU Analytics</h4>
+</div>
 </div>
 
-<div>
-  <h4>
-<a id="sjsu-analytics-6" class="anchor" href="#sjsu-analytics-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SJSU Analytics</h4>
-</div>
 
-<p></p>
+<div data-role="page" id="options" data-theme="d">
+<div data-role="header" data-theme="a">
+	<a href="#page" data-role="button" data-icon="minus">Home</a>
+	<h1>Options</h1>
 </div>
-
-<div id="options">
-<div>
-    <a href="#page">Home</a>
-    <h1>
-<a id="options" class="anchor" href="#options" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Options</h1>
-</div>
-
-<div>
-  <ul>
-        <li><a href="#events">Sort By Events</a></li>
-      <li><a href="#promotions">Sort By Promotions</a></li>
-      <li><a href="#courses">Sort By Courses</a></li>
-      <li><a href="#savedEvents">Saved Events</a></li>
+<div data-role="content">
+  <ul data-role="listview" data-theme="d">
+  		<li><button><a href="#events">Sort By Events</a></button></li>
+      <li><button><a href="#promotions">Sort By Promotions</a></button></li>
+      <li><button><a href="#courses">Sort By Courses</a></button></li>
+      <li><button onclick="savedsort();"><a href="#savedEvents">Saved Events</a></button></li>
   </ul>
-  
+  <script>
+		var events = new Array();
+		var promotions = new Array();
+		var courses = new Array();
+
+		function sortByEvent(){
+			 var temp = document.getElementsByClassName("event");
+			 for (i = 0; i < temp.length; i++)
+				 {
+					 events.push(temp.item(i).cloneNode(true));
+				 }
+		}
+	  	sortByEvent();
+		function sortByPromotions(){
+			var temp = document.getElementsByClassName("promotion");
+			for (i = 0; i < temp.length; i++)
+				 {
+					 promotions.push(temp.item(i).cloneNode(true));
+				 }
+		}
+	  sortByPromotions();
+		function sortByCourses(){
+			var temp = document.getElementsByClassName("courses");
+			for (i = 0; i < temp.length; i++)
+				 {
+					 courses.push(temp.item(i).cloneNode(true));
+				 }
+		}
+	  sortByCourses();
+	</script>
+</div>
+<div data-role="footer" data-theme="c">
+  <h4>SJSU Analytics</h4>
+</div>
 </div>
 
-<div>
-  <h4>
-<a id="sjsu-analytics-7" class="anchor" href="#sjsu-analytics-7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SJSU Analytics</h4>
-</div>
 
-<p></p>
+<div data-role="page" id="savedEvents" data-theme="d">
+<div data-role="header" data-theme="a">
+  <h1>Saved Events</h1>
 </div>
-
-<div id="savedEvents">
-<div>
-  <h1>
-<a id="saved-events" class="anchor" href="#saved-events" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Saved Events</h1>
-</div>
-
-<div>
-  <ul id="savedList">
+<div data-role="content">
+  <ul id = "savedList" data-role="listview" data-theme="d">
   </ul>
-  
+  <script type="text/javascript">
+    function savedsort() {
+      var ul = document.getElementById("savedList");
+      for(i = 0; i < saved.length; i++)
+        {
+          ul.appendChild(saved[i]);
+        }
+    }
+    </script>
 <p>
 </p>
 </div>
-
-<div>
-  <h4>
-<a id="sjsu-analytics-8" class="anchor" href="#sjsu-analytics-8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SJSU Analytics</h4>
+<div data-role="footer" data-theme="c">
+  <h4>SJSU Analytics</h4>
+</div>
 </div>
 
-<p></p>
-</div>
 
-<div id="events">
-<div>
-    <h1>
-<a id="events" class="anchor" href="#events" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Events</h1>
+<div data-role="page" id="events" data-theme="d">
+<div data-role="header" data-theme="a">
+	<h1>Events</h1>
 </div>
-
-<div>
-  <ul id="elementList">
+<div data-role="content">
+  <ul id = "elementList" data-role="listview" data-theme="d">
   </ul>
-  
+  <script type="text/javascript">
+		function eventsort() {
+  		var ul = document.getElementById("elementList");
+			for(i = 0; i < events.length; i++)
+				{
+					ul.appendChild(events[i]);
+				}
+		}
+	  </script>
 <p>
-    
+	<script type="text/javascript">
+		eventsort();
+	</script>
 </p>
 </div>
-
-<div>
-  <h4>
-<a id="sjsu-analytics-9" class="anchor" href="#sjsu-analytics-9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SJSU Analytics</h4>
+<div data-role="footer" data-theme="c">
+  <h4>SJSU Analytics</h4>
+</div>
 </div>
 
-<p></p>
+<div data-role="page" id="promotions" data-theme="d">
+<div data-role="header" data-theme="a">
+	<h1>Promotions</h1>
 </div>
-
-<div id="promotions">
-<div>
-    <h1>
-<a id="promotions" class="anchor" href="#promotions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Promotions</h1>
-</div>
-
-<div>
-  <ul id="promotionList">
+<div data-role="content">
+  <ul id = "promotionList" data-role="listview" data-theme="d">
   </ul>
-  
+  <script type="text/javascript">
+	  function promotionsort() {
+  		var ul = document.getElementById("promotionList");
+			for(i = 0; i < promotions.length; i++)
+				{
+					ul.appendChild(promotions[i]);
+				}
+		}
+	  promotionsort();
+	</script>
+</div>
+<div data-role="footer" data-theme="c">
+  <h4>SJSU Analytics</h4>
+</div>
 </div>
 
-<div>
-  <h4>
-<a id="sjsu-analytics-10" class="anchor" href="#sjsu-analytics-10" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SJSU Analytics</h4>
-</div>
 
-<p></p>
+<div data-role="page" id="courses" data-theme="d">
+<div data-role="header" data-theme="a">
+	<h1>Courses</h1>
 </div>
-
-<div id="courses">
-<div>
-    <h1>
-<a id="courses" class="anchor" href="#courses" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Courses</h1>
-</div>
-
-<div>
-  <ul id="coursesList">
+<div data-role="content">
+  <ul id = "coursesList" data-role="listview" data-theme="d">
   </ul>
-  
+  <script type="text/javascript">
+	  function coursesort() {
+  		var ul = document.getElementById("coursesList");
+			for(i = 0; i < courses.length; i++)
+				{
+					ul.appendChild(courses[i]);
+				}
+		}
+	  coursesort();
+	</script>
+</div>
+<div data-role="footer" data-theme="c">
+  <h4>SJSU Analytics</h4>
+</div>
 </div>
 
-<div>
-  <h4>
-<a id="sjsu-analytics-11" class="anchor" href="#sjsu-analytics-11" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SJSU Analytics</h4>
+
+<div data-role="page" id="search" data-theme="d">
+<div data-role="header" data-theme="a">
+	<a href="#page" data-role="button" data-icon="minus">Home</a>
+	<h1>Search</h1>
 </div>
-
-<p></p>
-</div>
-
-<div id="search">
-<div>
-    <a href="#page">Home</a>
-    <h1>
-<a id="search" class="anchor" href="#search" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Search</h1>
-</div>
-
-<div>
-  
-
-<ul>
-    <li id="0001">
-        
-        <a href="#page2"><img src="images/Capture.PNG" width="696" height="471" alt="">The 1975</a>
+<div data-role="content">
+  <form class="ui-filterable">
+</form>
+<ul data-role="listview" data-filter="true" data-filter-reveal="true" data-input="#autocomplete-input">
+    <li id = "0001" class = "event" onclick = "adlook(name2)">
+        <script>
+          var name2 = "The 1975";
+        </script>
+        <a href="#page2"><img src="images/Capture.PNG" width="696" height="471" alt=""/>The 1975</a>
       </li>
-      <li id="0002">
-        
-        <a href="#page3"><img src="images/nxt.PNG" width="661" height="440" alt="">WWE NXT Live</a>
+      <li id = "0002" class = "event" onclick = "adlook(name3)">
+        <script>
+          var name3 = "WWE NXT";
+        </script>
+        <a href="#page3"><img src="images/nxt.PNG" width="661" height="440" alt=""/>WWE NXT Live</a>
       </li>
-      <li id="0003">
-        
-        <a href="#page4"><img src="images/brandnew.PNG" width="661" height="438" alt="">Brand New</a>
+      <li id = "0003" class = "event" onclick = "adlook(name4)">
+        <script>
+          var name4 = "Brand New";
+        </script>
+        <a href="#page4"><img src="images/brandnew.PNG" width="661" height="438" alt=""/>Brand New</a>
       </li>
-      <li id="0004">
-        
-        <a href="#page5"><img src="images/scott.PNG" width="826" height="551" alt="">Scott Bradlees Postmodern Jukebox</a>
+      <li id = "0004" class = "event" onclick = "adlook(name5)">
+        <script>
+          var name5 = "Scott Bradlees Postmodern Jukebox";
+        </script>
+        <a href="#page5"><img src="images/scott.PNG" width="826" height="551" alt=""/>Scott Bradlees Postmodern Jukebox</a>
       </li>
       
-      <li id="0005">
-        
-        <a href="#page6"><img src="images/subway-logo-green.PNG" width="826" height="551" alt="">Subway</a>
+      <li id = "0005" class = "promotion" onclick="adlook(name6)">
+        <script>
+          var name6 = "Subway";
+        </script>
+        <a href="#page6"><img src="images/subway-logo-green.PNG" width="826" height="551" alt=""/>Subway</a>
       </li>
 
-      <li id="0006">
-        
-        <a href="#page7"><img src="images/cs100w.jpg" width="826" height="551" alt="">CS100W</a>
+      <li id = "0006" class = "courses" onclick="adlook(name7)">
+        <script>
+          var name7 = "CS100W";
+        </script>
+        <a href="#page7"><img src="images/cs100w.jpg" width="826" height="551" alt=""/>CS100W</a>
       </li>
    
 </ul>
 </div>
-
-<div>
-  <h4>
-<a id="sjsu-analytics-12" class="anchor" href="#sjsu-analytics-12" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SJSU Analytics</h4>
+<div data-role="footer" data-theme="c">
+  <h4>SJSU Analytics</h4>
+</div>
 </div>
 
-<p></p>
-</div>
-
-<p> </p>
-
-<p>
-</p>
-
-      <footer class="site-footer">
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
-
-    </section>
-
-  
-  </body>
+<p>&nbsp;</p>
+</body>
 </html>
