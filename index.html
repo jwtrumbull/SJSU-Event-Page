@@ -41,7 +41,7 @@ tr:nth-child(even) {
   <div data-role="header" data-theme="a" data-backbtn="false">
   <h2>Login</h2>
   <label>ID:<br/></label>
-  <input id = "id" type="text" name="idNumber" value="Enter ID Number"><br/>
+  <input id = "id" type="text" class="ghost-input" placeholder="Enter ID Number" name="idNumber" ><br/>
 
   <script>
   function myIdChecker(){
@@ -373,10 +373,10 @@ Closed</p>
 </div>
 <div data-role="content">
   <ul data-role="listview" data-theme="d">
-  		<li><button><a href="#events">Sort By Events</a></button></li>
-      <li><button><a href="#promotions">Sort By Promotions</a></button></li>
-      <li><button><a href="#courses">Sort By Courses</a></button></li>
-      <li><button onclick="savedsort();"><a href="#savedEvents">Saved Events</a></button></li>
+  	  <li><div align = "Center"><a href="#events" data-role="button">Filter By Events</a></li>
+      <li><div align = "Center"><a href="#promotions" data-role="button">Filter By Promotions</a></li>
+      <li><div align = "Center"><a href="#courses" data-role="button">Filter By Courses</a></li>
+      <li><div align = "Center"><button onclick="savedsort();"><a href="#savedEvents" data-role="button">Saved Events</a></button></li>
       <li><div align = "Center"><a href="#loginpage" data-role="button" onclick="logOut();">Log Out</a></div></li>
   </ul>
   <script>
@@ -570,7 +570,7 @@ Closed</p>
   <h4>SJSU Analytics</h4>
 </div>
 </div>
-<!--this is a comment-->
+
 <p>&nbsp;</p>
 </body>
 </html>
