@@ -15,7 +15,6 @@
 </script>
 <script src="jquery.mobile-1.0b3/jquery.mobile-1.0b3.min.js" type="text/javascript"></script>
 <link href="styles/custom.css" rel="stylesheet" type="text/css">
-<link href="styles/f.css" rel="stylesheet" type="text/css">
 
 <style>
 table {
@@ -90,7 +89,7 @@ tr:nth-child(even) {
   </div>
   <div data-role="content">
     <ul id = "homelist" data-role="listview" data-theme="d">
-      <li id = "0001" class = "event" onclick = "adlook(name2)">
+      <!--<li id = "0001" class = "event" onclick = "adlook(name2)">
         <script>
           var name2 = "The 1975";
         </script>
@@ -127,9 +126,53 @@ tr:nth-child(even) {
           var name7 = "CS100W";
         </script>
         <a href="#page7"><img src="images/cs100w.jpg" width="826" height="551" alt=""/>CS100W</a>
-      </li>
+      </li>-->
 
     </ul>
+    
+    <script type="text/javascript">
+		//adlook(x) takes a string which is the name of the ad
+		function populatehomelist()
+		{
+			var homelist = document.getElementById("homelist");
+			var event, o, a, img, clickstr;
+		$.getJSON("adlist.json", function(data) {
+			for (var i = 0; i < data.length; i++)
+				{
+					o = data[i];
+					event = document.createElement("li");
+					event.class = String(o.CLASS);
+					event.setAttribute("id", String(o.ID));
+					
+					clickstr = 'adlook("' + o.NAME + '")';
+					event.setAttribute("onclick", clickstr);
+					
+					a = document.createElement("a");
+					a.setAttribute('href', o.HREF);
+					img = document.createElement("img");
+					img.setAttribute('src', o.SRC);
+					img.setAttribute('width', o.WIDTH);
+					img.setAttribute('height', o.HEIGHT);
+					img.setAttribute('alt', "");
+					a.appendChild(img);
+					a.appendChild(document.createTextNode(o.NAME));
+					event.appendChild(a);
+					//event.appendChild(document.createTextNode(o.NAME));
+					//homelist.appendChild(event);
+					$('#homelist').append(event);
+				}
+			//$('#homelist').listview('refresh');
+			sortByEvent();
+	    	sortByCourses();
+	    	sortByPromotions();
+    	});
+		}
+		$(document).ready(function()
+		{
+		  	populatehomelist();
+		});
+	  </script>
+    
   </div>
   <div data-role="footer" data-theme="c">
     <h4>SJSU Analytics</h4>
@@ -165,7 +208,7 @@ tr:nth-child(even) {
   function adlook(x){
     document.getElementById("data").innerHTML += "<tr>" + "<td>" + Date() + "</td>"  + "<td>" + x + "</td>"  + "<td>" + "Viewed" + "</td>"  + "<td>" + "" + "</td>"+ "<td>" + getID() + "</td>"  +"</tr>";
   }
-</script>>
+</script>
 <script>
 
 	function updateTable(x){
@@ -196,7 +239,7 @@ tr:nth-child(even) {
     <h1 id = "title7">CS100W</h1>
   </div>  
   <div data-role="content">
-    <p><img src="images/cs100w.jpg" width="290" height="187" alt="CS100W"><br>
+    <p><img src="images/cs100w.jpg" width="290" height="187" alt="CS100W"><br></p>
     <p>The purpose of Upper Division Technical Writing, CS100W is to develop advance proficiency in college-level writing, contemporary research strategies, and methodologies through preparation of proposals, technical reports, and presentations based on peer-reviewed scholarly research.</p>
       
    <script>
@@ -379,10 +422,10 @@ Closed</p>
 </div>
 <div data-role="content">
   <ul data-role="listview" data-theme="d">
-  	  <li><div align = "Center"><a href="#events" data-role="button">Filter By Events</a></li>
-      <li><div align = "Center"><a href="#promotions" data-role="button">Filter By Promotions</a></li>
-      <li><div align = "Center"><a href="#courses" data-role="button">Filter By Courses</a></li>
-      <li><div align = "Center"><button onclick="savedsort();"><a href="#savedEvents" data-role="button">Saved Events</a></button></li>
+  	  <li><div align = "Center"><a href="#events" data-role="button">Filter By Events</a></div></li>
+      <li><div align = "Center"><a href="#promotions" data-role="button">Filter By Promotions</a></div></li>
+      <li><div align = "Center"><a href="#courses" data-role="button">Filter By Courses</a></div></li>
+      <li><div align = "Center"><button onclick="savedsort();"><a href="#savedEvents" data-role="button">Saved Events</a></button></div></li>
       <li><div align = "Center"><a href="#loginpage" data-role="button" onclick="logOut();">Log Out</a></div></li>
   </ul>
   <script>
@@ -391,29 +434,97 @@ Closed</p>
 		var courses = new Array();
 
 		function sortByEvent(){
-			 var temp = document.getElementsByClassName("event");
+			 var temp = document.getElementById("homelist").getElementsByTagName("li");
+			 var o, a, img;
 			 for (i = 0; i < temp.length; i++)
 				 {
-					 events.push(temp.item(i).cloneNode(true));
+					 if (temp.item(i).class == "event")
+						 {
+							 o = document.createElement("li");
+							 o.setAttribute("class", temp.item(i).class);
+							 o.setAttribute("id", temp.item(i).id);
+							 o.setAttribute("onclick", temp.item(i).onclick);
+							 a = document.createElement("a");
+							 a.setAttribute("href", $("a", temp.item(i)).attr('href'));
+							 img = document.createElement("img");
+							 img.setAttribute("src", $("img", temp.item(i)).attr('src'));
+							 img.setAttribute("width", $("img", temp.item(i)).attr('width'));
+							 img.setAttribute("height", $("img", temp.item(i)).attr('height'));
+							 img.setAttribute('alt', "");
+							 
+							 a.appendChild(img);
+							 a.appendChild(document.createTextNode(temp.item(i).getElementsByTagName("a").item(0).textContent));
+							 o.appendChild(a);
+							 
+							 //events.push(temp.item(i).cloneNode(true));
+							 events.push(o);
+						 }
 				 }
+			eventsort();
 		}
-	  	sortByEvent();
+	  	//sortByEvent();
+	    //sortByCourses();
+	    //sortByPromotions();
 		function sortByPromotions(){
-			var temp = document.getElementsByClassName("promotion");
+			var temp = document.getElementById("homelist").getElementsByTagName("li");
+			var o, a, img;
 			for (i = 0; i < temp.length; i++)
 				 {
-					 promotions.push(temp.item(i).cloneNode(true));
+					 if (temp.item(i).class == "promotion")
+						 {
+							 o = document.createElement("li");
+							 o.setAttribute("class", temp.item(i).class);
+							 o.setAttribute("id", temp.item(i).id);
+							 o.setAttribute("onclick", temp.item(i).onclick);
+							 a = document.createElement("a");
+							 a.setAttribute("href", $("a", temp.item(i)).attr('href'));
+							 img = document.createElement("img");
+							 img.setAttribute("src", $("img", temp.item(i)).attr('src'));
+							 img.setAttribute("width", $("img", temp.item(i)).attr('width'));
+							 img.setAttribute("height", $("img", temp.item(i)).attr('height'));
+							 img.setAttribute('alt', "");
+							 
+							 a.appendChild(img);
+							 a.appendChild(document.createTextNode(temp.item(i).getElementsByTagName("a").item(0).textContent));
+							 o.appendChild(a);
+							 
+							 //promotions.push(temp.item(i).cloneNode(true));
+							 promotions.push(o);
+						 }
 				 }
+			promotionsort();
 		}
-	  sortByPromotions();
+	  //sortByPromotions();
 		function sortByCourses(){
-			var temp = document.getElementsByClassName("courses");
+			var temp = document.getElementById("homelist").getElementsByTagName("li");
+			var o, a, img;
 			for (i = 0; i < temp.length; i++)
 				 {
-					 courses.push(temp.item(i).cloneNode(true));
+					 if (temp.item(i).class == "courses")
+						 {
+							 o = document.createElement("li");
+							 o.setAttribute("class", temp.item(i).class);
+							 o.setAttribute("id", temp.item(i).id);
+							 o.setAttribute("onclick", temp.item(i).onclick);
+							 a = document.createElement("a");
+							 a.setAttribute("href", $("a", temp.item(i)).attr('href'));
+							 img = document.createElement("img");
+							 img.setAttribute("src", $("img", temp.item(i)).attr('src'));
+							 img.setAttribute("width", $("img", temp.item(i)).attr('width'));
+							 img.setAttribute("height", $("img", temp.item(i)).attr('height'));
+							 img.setAttribute('alt', "");
+							 
+							 a.appendChild(img);
+							 a.appendChild(document.createTextNode(temp.item(i).getElementsByTagName("a").item(0).textContent));
+							 o.appendChild(a);
+							 
+							 //courses.push(temp.item(i).cloneNode(true));
+							 courses.push(o);
+				 		}
 				 }
+			coursesort();
 		}
-	  sortByCourses();
+	  //sortByCourses();
 	</script>
 </div>
 <div data-role="footer" data-theme="c">
@@ -465,7 +576,7 @@ Closed</p>
 	  </script>
 <p>
 	<script type="text/javascript">
-		eventsort();
+		//eventsort();
 	</script>
 </p>
 </div>
@@ -489,7 +600,7 @@ Closed</p>
 					ul.appendChild(promotions[i]);
 				}
 		}
-	  promotionsort();
+	  //promotionsort();
 	</script>
 </div>
 <div data-role="footer" data-theme="c">
@@ -513,7 +624,7 @@ Closed</p>
 					ul.appendChild(courses[i]);
 				}
 		}
-	  coursesort();
+	  //coursesort();
 	</script>
 </div>
 <div data-role="footer" data-theme="c">
